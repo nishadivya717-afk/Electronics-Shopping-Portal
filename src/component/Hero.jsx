@@ -72,29 +72,26 @@ export default function Hero() {
         </Typography>
 
         <Button
-  component={Link}
-  to="/products"
-  variant="contained"
-  sx={{
-    backgroundColor: "#ef3838",
-    color: "#fff",
-    borderRadius: "28px",
-    px: 4,
-    py: 1.5,
-    minWidth: "155px",
-    fontSize: "15px",
-    fontWeight: 700,
-    textTransform: "none",
-    boxShadow: "0 4px 10px rgba(239, 56, 56, 0.25)",
+          component={Link}
+          to="/products"
+          variant="contained"
+          sx={{
+            backgroundColor: "#e53935",
+            color: "#fff",
+            borderRadius: "25px",
+            px: 4,
+            py: 1.4,
+            textTransform: "none",
+            fontSize: "15px",
+            fontWeight: 600,
 
-    "&:hover": {
-      backgroundColor: "#d92f2f",
-      boxShadow: "0 6px 14px rgba(239, 56, 56, 0.35)",
-    },
-  }}
->
-  Shop Now →
-</Button>
+            "&:hover": {
+              backgroundColor: "#c62828",
+            },
+          }}
+        >
+          Shop Now →
+        </Button>
       </Box>
 
       {/* RIGHT IMAGE AREA */}

@@ -51,13 +51,15 @@ export default function Navbar() {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // Total cart quantity
+  // ================= CART COUNT =================
+
   const cartCount = cart.reduce(
     (total, item) => total + (item.quantity || 1),
     0
   );
 
-  // Logout
+  // ================= LOGOUT =================
+
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
 
@@ -76,6 +78,7 @@ export default function Navbar() {
         backgroundColor: "#fff",
         color: "#111",
         borderBottom: "1px solid #eee",
+        zIndex: 1200,
       }}
     >
       <Toolbar
@@ -83,37 +86,52 @@ export default function Navbar() {
           minHeight: "76px !important",
           px: {
             xs: 2,
-            md: 6,
+            sm: 3,
+            md: 5,
+            lg: 6,
           },
-          gap: 3,
+          gap: {
+            xs: 1,
+            md: 3,
+          },
         }}
       >
+
         {/* ================= LOGO ================= */}
 
-        <Typography
+        <Box
           component={Link}
           to="/"
           sx={{
+            display: "flex",
+            alignItems: "center",
             textDecoration: "none",
-            fontSize: {
-              xs: "18px",
-              md: "20px",
-            },
-            fontWeight: 800,
-            whiteSpace: "nowrap",
-            color: "#111",
+            minWidth: "fit-content",
           }}
         >
-          ELECTRONICS
-          <Box
-            component="span"
+          <Typography
             sx={{
-              color: "#ef3838",
+              fontSize: {
+                xs: "20px",
+                sm: "23px",
+              },
+              fontWeight: 800,
+              letterSpacing: "-0.8px",
+              color: "#111",
+              whiteSpace: "nowrap",
             }}
           >
-            STORE
-          </Box>
-        </Typography>
+            Electro
+            <Box
+              component="span"
+              sx={{
+                color: "#ef3838",
+              }}
+            >
+              Store
+            </Box>
+          </Typography>
+        </Box>
 
         {/* ================= NAV LINKS ================= */}
 
@@ -124,24 +142,38 @@ export default function Navbar() {
               md: "flex",
             },
             alignItems: "center",
-            gap: 5,
-            ml: 2,
+            gap: {
+              md: 3,
+              lg: 4,
+            },
+            ml: {
+              md: 2,
+              lg: 3,
+            },
           }}
         >
+
+          {/* HOME */}
+
           <Typography
             component={Link}
             to="/"
             sx={{
               textDecoration: "none",
-              color: "#111",
-              fontSize: "14px",
+              color: "#ef3838",
+              fontSize: "16px",
+              fontWeight: 600,
+              whiteSpace: "nowrap",
+
               "&:hover": {
-                color: "#ef3838",
+                color: "#d92f2f",
               },
             }}
           >
             Home
           </Typography>
+
+          {/* CATEGORIES */}
 
           <Typography
             component={Link}
@@ -149,7 +181,10 @@ export default function Navbar() {
             sx={{
               textDecoration: "none",
               color: "#111",
-              fontSize: "14px",
+              fontSize: "16px",
+              fontWeight: 500,
+              whiteSpace: "nowrap",
+
               "&:hover": {
                 color: "#ef3838",
               },
@@ -158,13 +193,18 @@ export default function Navbar() {
             Categories
           </Typography>
 
+          {/* ACCESSORIES */}
+
           <Typography
             component={Link}
             to="/products"
             sx={{
               textDecoration: "none",
               color: "#111",
-              fontSize: "14px",
+              fontSize: "16px",
+              fontWeight: 500,
+              whiteSpace: "nowrap",
+
               "&:hover": {
                 color: "#ef3838",
               },
@@ -173,13 +213,18 @@ export default function Navbar() {
             Accessories
           </Typography>
 
+          {/* ABOUT US */}
+
           <Typography
             component={Link}
             to="/about"
             sx={{
               textDecoration: "none",
               color: "#111",
-              fontSize: "14px",
+              fontSize: "16px",
+              fontWeight: 500,
+              whiteSpace: "nowrap",
+
               "&:hover": {
                 color: "#ef3838",
               },
@@ -196,13 +241,18 @@ export default function Navbar() {
             marginLeft: "auto",
             display: "flex",
             alignItems: "center",
-            gap: 2,
+            gap: {
+              xs: 0.5,
+              sm: 1,
+              md: 2,
+            },
           }}
         >
+
           {/* ================= SEARCH ================= */}
 
           <TextField
-            placeholder="Search..."
+            placeholder="Search products..."
             size="small"
             value={navbarSearch}
             onChange={(e) => setNavbarSearch(e.target.value)}
@@ -214,64 +264,116 @@ export default function Navbar() {
               },
 
               width: {
-                sm: 190,
-                md: 240,
+                sm: 180,
+                md: 220,
+                lg: 300,
               },
 
               "& .MuiOutlinedInput-root": {
+                height: 44,
                 borderRadius: "25px",
-                backgroundColor: "#f8f8f8",
-                height: 40,
+                backgroundColor: "#fff",
 
                 "& fieldset": {
-                  border: "1px solid #eee",
+                  border: "1px solid #ddd",
                 },
 
                 "&:hover fieldset": {
-                  border: "1px solid #ddd",
+                  border: "1px solid #ccc",
                 },
 
                 "&.Mui-focused fieldset": {
-                  border: "1px solid #ddd",
+                  border: "1px solid #ef3838",
                 },
               },
-            }}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleNavbarSearch}
-                      size="small"
-                      sx={{
-                        color: "#777",
-                        "&:hover": {
-                          color: "#ef3838",
-                          backgroundColor: "transparent",
-                        },
-                      }}
-                    >
-                      <SearchIcon
-                        sx={{
-                          fontSize: 21,
-                        }}
-                      />
-                    </IconButton>
-                  </InputAdornment>
-                ),
+
+              "& .MuiInputBase-input": {
+                fontSize: "14px",
               },
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleNavbarSearch}
+                    size="small"
+                    sx={{
+                      color: "#555",
+
+                      "&:hover": {
+                        color: "#ef3838",
+                        backgroundColor: "transparent",
+                      },
+                    }}
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
           />
 
+          {/* ================= WISHLIST ================= */}
+
+          <Button
+            component={Link}
+            to="/wishlist"
+            sx={{
+              display: {
+                xs: "none",
+                lg: "flex",
+              },
+              alignItems: "center",
+              gap: 0.7,
+              color: "#111",
+              textTransform: "none",
+              fontSize: "16px",
+              fontWeight: 500,
+              minWidth: "auto",
+              px: 1,
+
+              "&:hover": {
+                backgroundColor: "transparent",
+                color: "#ef3838",
+              },
+            }}
+          >
+            <Box
+              component="span"
+              sx={{
+                fontSize: "27px",
+                lineHeight: 1,
+              }}
+            >
+              ♡
+            </Box>
+
+            Wishlist
+          </Button>
+
           {/* ================= CART ================= */}
 
-          <IconButton
+          <Button
             component={Link}
             to="/cart"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.8,
               color: "#111",
+              textTransform: "none",
+              fontSize: {
+                xs: "14px",
+                sm: "15px",
+                lg: "16px",
+              },
+              fontWeight: 500,
+              minWidth: "auto",
+              px: 1,
+
               "&:hover": {
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "transparent",
+                color: "#ef3838",
               },
             }}
           >
@@ -279,12 +381,35 @@ export default function Navbar() {
               badgeContent={cartCount}
               color="error"
               showZero
+              sx={{
+                "& .MuiBadge-badge": {
+                  fontSize: "10px",
+                  minWidth: 18,
+                  height: 18,
+                },
+              }}
             >
-              <ShoppingCartIcon />
+              <ShoppingCartIcon
+                sx={{
+                  fontSize: 28,
+                }}
+              />
             </Badge>
-          </IconButton>
 
-          {/* ================= USER / LOGIN ================= */}
+            <Box
+              component="span"
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "inline",
+                },
+              }}
+            >
+              Cart
+            </Box>
+          </Button>
+
+          {/* ================= LOGIN / USER ================= */}
 
           {loggedInUser ? (
             <>
@@ -292,10 +417,10 @@ export default function Navbar() {
                 sx={{
                   display: {
                     xs: "none",
-                    sm: "block",
+                    md: "block",
                   },
-                  fontWeight: 700,
-                  fontSize: "14px",
+                  fontSize: "15px",
+                  fontWeight: 600,
                   whiteSpace: "nowrap",
                 }}
               >
@@ -305,23 +430,19 @@ export default function Navbar() {
                   loggedInUser.email}
               </Typography>
 
-
               <Button
                 onClick={handleLogout}
-                variant="outlined"
                 sx={{
-                  borderColor: "#ef3838",
-                  color: "#ef3838",
-                  borderRadius: "25px",
-                  px: 2.5,
-                  py: 0.8,
+                  color: "#111",
                   textTransform: "none",
-                  fontWeight: 600,
+                  fontSize: "15px",
+                  fontWeight: 500,
+                  minWidth: "auto",
+                  px: 1,
 
                   "&:hover": {
-                    borderColor: "#d92f2f",
-                    color: "#d92f2f",
-                    backgroundColor: "#fff5f5",
+                    color: "#ef3838",
+                    backgroundColor: "transparent",
                   },
                 }}
               >
@@ -332,21 +453,34 @@ export default function Navbar() {
             <Button
               component={Link}
               to="/login"
-              variant="contained"
               sx={{
-                backgroundColor: "#ef3838",
-                color: "#fff",
-                borderRadius: "25px",
-                px: 3,
-                py: 1,
+                color: "#111",
                 textTransform: "none",
+                fontSize: {
+                  xs: "14px",
+                  sm: "15px",
+                  lg: "16px",
+                },
                 fontWeight: 600,
+                minWidth: "auto",
+                px: 1.5,
 
                 "&:hover": {
-                  backgroundColor: "#d92f2f",
+                  color: "#ef3838",
+                  backgroundColor: "transparent",
                 },
               }}
             >
+              <Box
+                component="span"
+                sx={{
+                  fontSize: "23px",
+                  mr: 0.7,
+                }}
+              >
+                ♙
+              </Box>
+
               Login
             </Button>
           )}
